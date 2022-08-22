@@ -1,0 +1,251 @@
+!
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Logout demo</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--Import materialize.css-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="materialize/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <script src="dist/index.js" type="module" defer></script>
+    <script
+      type="text/javascript"
+      src="materialize/js/materialize.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Navbar Link</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+          <li><a href="#">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+      </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <h1 class="header center orange-text">Login/Logout</h1>
+
+        <!--login form-->
+        <div class="row center">
+          <div class="row" id="login-register-btns">
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="submit"
+              id="login-section"
+            >
+              Login
+              <!-- <i class="material-icons right">in</i> -->
+            </button>
+            <button
+              id="form-reset-button"
+              class="btn waves-effect waves-light green lighten-1"
+              type="button"
+              id="registration-section"
+            >
+              Register
+              <!-- <i class="material-icons right">cached</i> -->
+            </button>
+          </div>
+          <!-- Registration form-->
+          <form id="login-form" class="col s12">
+              <div class="row">
+                <div class="input-field col s6"> 
+                  <!-- <i class="material-icons prefix">account_circle</i> -->
+                  <input id="usernameLogin" name="username" type="text" class="validate">
+                  <label for="usernameLogin">Username</label>
+                </div>
+                <div class="input-field col s6"> 
+                  <!-- <i class="material-icons prefix">fingerprint</i> -->
+                  <input id="passwordLogin" name="password" type="password" class="validate">
+                  <label for="passwordLogin">Password</label>
+                </div>
+              </div>
+              <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="submit"
+              id="login-btn"
+            >
+              Login
+              <i class="material-icons right">send</i>
+            </button> 
+          </form>
+          <form id="registration-form" class="col s12">
+            <div class="row">
+              <input id="id" name="id" hidden/>
+            </div>
+            <div class="row">
+              <div class="input-field firstName-section col s6">
+                <input id="firstName" name="firstName" type="text" class="text" />
+                <label for="firstName">First Name</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+              <div class="input-field lastName-section col s6">
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  class="text"
+                />
+                <label for="lastName">Last Name</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+            </div>
+            <div class="input-field gender-section col s12">
+              
+                <input
+                  id="gender"
+                  name="gender"
+                  type="text"
+                  class="gender"
+                />
+                <label for="lastName">Gender</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              
+              <!-- <select>
+                <option value="" disabled selected>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <label>Materialize Select</label>
+            </div>  -->
+            <div class="row">
+              <div class="input-field username-section col s12">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  class="validate"
+                  
+                />
+                <label for="username">Username</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field password-section col s12">
+              <input id="password" name="password" type="password" class="validate">
+              <label for="password">Password</label>
+              <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="input-field userPicture-section col s12">
+                <input
+                  id="userPicture"
+                  name="userPicture"
+                  type="url"
+                  class="validate"
+                />
+                <label for="userPicture">Profile Img</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field description-section col s12">
+                <textarea id="description" name="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+                <span class="helper-text" data-error="" data-success=""></span>
+              </div>
+            </div>
+            <div class="row">
+              <input id="status"  name="status" hidden/>
+            </div>
+            <div class="row">
+              <input id="registrationTs" name="registrationTs" hidden/>
+            </div>
+            <div class="row">
+              <input id="lastModifTs" name="lastModifTs" hidden/>
+            </div>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="submit"
+            >
+              Register
+              <i class="material-icons right">send</i>
+            </button> 
+             <!-- <button
+              id="form-reset-button"
+              class="btn waves-effect waves-light red lighten-1"
+              type="button"
+            >
+              Reset
+              <i class="material-icons right">cached</i>
+            </button>  -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="errors"></div>
+      <section id="users" class="row"></section>
+    </div>
+
+    <footer class="page-footer orange">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">
+              We are a team of college students working on this project like
+              it's our full time job. Any amount would help support and continue
+              development on this project and is greatly appreciated.
+            </p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Settings</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          Made by
+          <a class="orange-text text-lighten-3" href="http://materializecss.com"
+            >Materialize</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+  }
+
+  /* form styling */
+  #login-form,#registration-form{
+    background-color: rgba(173, 216, 230, 0.598);
+    padding: 5%;
+    box-shadow: 0 0 7px 0 grey;
+  }
+
+  /* login form styling */
+
+   /* registration form styling */
+
+
+   div.container.content{
+    padding-bottom: 10%;
+   }
+  #errors div {
+      padding: 5px 20px;
+      border: 1px solid red;
+      border-radius: 5px;
+      background-color: rgb(252, 230, 230);
+      color: red;
+      text-align: center;
+  }
+
+  /* users information container styling */
+  #users{
+    display: none;
+  }
+  
+  #posts article .card{
+  height: 480px;
+  }
+  .card {
+      margin: 15px;
+    
+  }
+  
+  div.card-image {
+      height: 200px;
+      padding: 20px;
+      display: flex;
+  }
+  
+  .card-image image {
+      width: 90%;
+  }
+  .btn.edit{
+    display: none;
+  }

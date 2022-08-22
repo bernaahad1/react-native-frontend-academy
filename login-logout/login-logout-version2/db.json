@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "firstName": "gdsfg",
+      "lastName": "regthret",
+      "username": "usern",
+      "password": "123",
+      "gender": "",
+      "userRole": "",
+      "userPicture": "",
+      "description": "",
+      "status": "",
+      "registrationTs": "2022-08-10T09:20:09.505Z",
+      "lastModifTs": "2022-08-10T09:20:09.505Z",
+      "id": 1
+    },
+    {
+      "firstName": "Berna",
+      "lastName": "Ahad",
+      "username": "berna@ahad.bg",
+      "password": "12345678",
+      "gender": "female",
+      "userRole": "",
+      "userPicture": "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      "description": "I am new here...",
+      "status": "",
+      "registrationTs": "2022-08-10T13:37:26.641Z",
+      "lastModifTs": "2022-08-10T13:37:26.641Z",
+      "id": 2
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "username": "",
+      "password": "",
+      "gender": "",
+      "userRole": "",
+      "userPicture": "",
+      "description": "",
+      "status": "",
+      "registrationTs": "2022-08-10T13:40:10.257Z",
+      "lastModifTs": "2022-08-10T13:40:10.257Z",
+      "id": 3
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "username": "ddff",
+      "password": "",
+      "gender": "",
+      "userRole": "",
+      "userPicture": "",
+      "description": "",
+      "status": "",
+      "registrationTs": "2022-08-10T13:40:33.073Z",
+      "lastModifTs": "2022-08-10T13:40:33.073Z",
+      "id": 4
+    }
+  ]
+}

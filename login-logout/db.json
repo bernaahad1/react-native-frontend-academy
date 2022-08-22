@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "firstName": "gdsfg",
+      "lastName": "regthret",
+      "username": "usern",
+      "password": "123",
+      "gender": "",
+      "userRole": "",
+      "userPicture": "",
+      "description": "",
+      "status": "",
+      "registrationTs": "2022-08-10T09:20:09.505Z",
+      "lastModifTs": "2022-08-10T09:20:09.505Z",
+      "id": 1
+    }
+  ]
+}
