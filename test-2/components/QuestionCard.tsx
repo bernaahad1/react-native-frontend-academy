@@ -21,7 +21,6 @@ interface imageItemProps {
   question: Question;
   onEdit: (image: Question) => void | undefined;
   onDelete: (image: Question) => void | undefined;
-  onFavouritesAdd: (image: Question) => void | undefined;
   onMove: (index1: number, index2: number) => void;
   maxQuestions: number;
   appState: Views;
@@ -68,7 +67,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
         >
           {this.props.question.picture !== "" && (
             <Image
-              style={{ ...styles.image,width:300,height:200}}
+              style={{ ...styles.image, width: 300, height: 200 }}
               source={{ uri: this.props.question.picture }}
             ></Image>
           )}
@@ -104,7 +103,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
                   {value.picture !== "" && (
                     <Image
                       style={styles.image}
-                      source={{ uri: value.picture}}
+                      source={{ uri: value.picture }}
                     ></Image>
                   )}
                   <Text style={{ textAlign: "right", alignSelf: "flex-end" }}>

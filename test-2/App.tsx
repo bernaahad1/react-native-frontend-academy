@@ -89,27 +89,6 @@ class App extends Component<{}, UserAppState> {
     this.setState(({ updates }) => ({ updates: (updates = "") }));
   };
 
-  // loadMoreItems = async () => {
-  //   try {
-  //     const newquestions = await questionsAPI.findByPage(
-  //       this.state.page,
-  //       DEFAULT_PAGE_SIZE
-  //     );
-  //     this.setState(({ questions }) => ({ questions: questions.concat(newquestions) }));
-  //     this.setState(({ page }) => ({ page: page + 1 }));
-
-  //     this.setState(({ errors }) => ({
-  //       errors: "",
-  //     }));
-  //   } catch (err) {
-  //     this.setState({ errors: err as string });
-  //   }
-  // };
-
-  // handlefilterTagChange = (tags: string[] | undefined) => {
-  //   //this.setState({ filterTags: tags });
-  // };
-
   handleDeleteQuestion = async (question: Question) => {
     try {
       await questionsAPI.deleteById(question.id);
@@ -142,23 +121,6 @@ class App extends Component<{}, UserAppState> {
     [newArr[index1], newArr[index2]] = [newArr[index2], newArr[index1]];
     this.setState({ questions: newArr });
   };
-  // handleAddToFav = async (question: Question) => {
-  //   question.isFavorite = !question.isFavorite;
-  //   try {
-  //     const updated = await questionsAPI.update(question);
-  //     this.setState(({ questions }) => ({
-  //       questions: questions.map((td) => (td.id === updated.id ? updated : td)),
-  //       editingQuestion: getRresetQuestion,
-  //     }));
-  //   } catch (err) {
-  //     this.setState(({ errors }) => ({ errors: errors.concat(err as string) }));
-  //     setTimeout(() => {
-  //       this.setState(({ errors }) => ({ errors: (errors = "") }));
-  //     }, 3000);
-  //     this.setState(({ updates }) => ({ updates: (updates = "") }));
-  //     console.log(err as string);
-  //   }
-  // };
 
   render() {
     return (
@@ -242,15 +204,9 @@ class App extends Component<{}, UserAppState> {
                   appState={this.state.appStatus}
                   onEdit={this.handleEditQuestion}
                   onDelete={this.handleDeleteQuestion}
-                  onFavouritesAdd={() => {}} //this.handleAddToFav}
                   appStatusChange={this.handleViewChange}
                   page={0}
                   onMove={this.handleMove}
-                  //onLoad={this.loadMoreItems}
-                  filterFavorites={true}
-                  onLoad={function (): void {
-                    throw new Error("Function not implemented.");
-                  }}
                 />
               </View>
             ) : this.state.appStatus === Views.AddQuestion ? (
@@ -286,15 +242,9 @@ class App extends Component<{}, UserAppState> {
                   appState={this.state.appStatus}
                   onEdit={this.handleEditQuestion}
                   onDelete={this.handleDeleteQuestion}
-                  onFavouritesAdd={() => {}} //this.handleAddToFav}
                   appStatusChange={this.handleViewChange}
                   page={0}
                   onMove={this.handleMove}
-                  //onLoad={this.loadMoreItems}
-                  filterFavorites={true}
-                  onLoad={function (): void {
-                    throw new Error("Function not implemented.");
-                  }}
                 />
               </View>
             )}

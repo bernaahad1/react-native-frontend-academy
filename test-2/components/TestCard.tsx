@@ -13,43 +13,28 @@ import { Question } from "../model/question-answer-model";
 import { Views } from "../model/shared-types";
 import Checkbox from "expo-checkbox";
 
-interface Point {
-  x: number;
-  y: number;
-}
-
 interface TestCardProps {
   question: Question;
   appState: Views;
   appStatusChange: (state: Views) => void;
   id: number;
-  onDrop?: () => void;
-  
 }
 interface TestCardState {
   isChecked: boolean[];
 }
 export default class TestCard extends Component<TestCardProps, TestCardState> {
-
-
   state: Readonly<TestCardState> = {
     isChecked: [],
   };
-  
+
   render() {
     const { answers } = { ...this.props.question };
     return (
       <View style={{ ...styles.outerCard }}>
-        <Animated.View
-          // {...this.panResponder.panHandlers}
-          style={{
-            ...styles.card,
-          }}
-          key={this.props.question.id!.toString()}
-        >
+        <View style={styles.card} key={this.props.question.id!.toString()}>
           {this.props.question.picture !== "" && (
             <Image
-              style={{ ...styles.image ,width:400, height:300,}}
+              style={{ ...styles.image, width: 400, height: 300 }}
               source={{ uri: this.props.question.picture }}
             ></Image>
           )}
@@ -65,45 +50,35 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
           >
             {this.props.question.text}
           </Text>
-          
+
           <View style={{ width: "100%" }}>
             {answers &&
               Object.entries(answers).map(([key, value]) => (
-                <>
-                  <View style={styles.section} key={parseInt(key)}>
-                    <Checkbox
-                      style={styles.checkbox}
-                      value={this.state.isChecked[parseInt(key)]}
-                      onValueChange={() => {
-                        this.setState({
-                          isChecked: {
-                            ...this.state.isChecked,
-                            [key]: !this.state.isChecked[parseInt(key)] ,
-                          },
-                        });
-                      }}
-                      color={
-                        this.state.isChecked[parseInt(key)]
-                          ? "#4630EB"
-                          : "white"
-                      }
-                    />
-                    <Image
-                      style={styles.image}
-                      source={{ uri: value.picture }}
-                    ></Image>
-                    <Text style={styles.paragraph}>
-                      {value.text}
-                    </Text>
-                  </View>
-                  
-                </>
+                <View style={styles.section} key={parseInt(key)}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={this.state.isChecked[parseInt(key)]}
+                    onValueChange={() => {
+                      this.setState({
+                        isChecked: {
+                          ...this.state.isChecked,
+                          [key]: !this.state.isChecked[parseInt(key)],
+                        },
+                      });
+                    }}
+                    color={
+                      this.state.isChecked[parseInt(key)] ? "#4630EB" : "white"
+                    }
+                  />
+                  <Image
+                    style={styles.image}
+                    source={{ uri: value.picture }}
+                  ></Image>
+                  <Text style={styles.paragraph}>{value.text}</Text>
+                </View>
               ))}
           </View>
-          <>
-            
-          </>
-        </Animated.View>
+        </View>
       </View>
     );
   }
@@ -133,7 +108,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 10,
     fontWeight: "bold",
-    textTransform: "capitalize",
+    // textTransform: "capitalize",
   },
   image: {
     width: 30,

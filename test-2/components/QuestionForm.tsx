@@ -85,6 +85,7 @@ export default class QuestionForm extends Component<
     validations: {
       text: yup.string().min(10).max(500),
       uri: yup.string().min(10),
+     
     },
     typeArr: ["None", "MultipleChoice", "MultipleResponse", "DaragAndDrop"],
     answers: this.props.question?.answers || {},
@@ -155,6 +156,7 @@ export default class QuestionForm extends Component<
     this.setState(({ answers }) => ({ answers: { ...answers, ...newVal } }));
     // console.log(this.state.additions);
   };
+
   handleDeleteAnswer = (key: string) => {
     const { answers } = this.state;
     const blob = Object.keys(answers)
