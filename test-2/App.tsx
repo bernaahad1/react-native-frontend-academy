@@ -35,7 +35,7 @@ interface UserAppState {
   // personalPosts: Post[] | undefined;
 }
 const getRresetQuestion = () => {
-  return new Question("", "", 0, {});
+  return new Question("", "", "", {});
 };
 
 class App extends Component<{}, UserAppState> {

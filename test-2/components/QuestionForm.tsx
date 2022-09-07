@@ -107,9 +107,7 @@ export default class QuestionForm extends Component<
       return validationError.errors;
     }
   }
-  handleDeleteAnswer = (key: string, value: string) => {
-    this.setState(({ answers })=>({}))
-}
+
   handleValidation = (
     field: string,
     value: string,
@@ -150,10 +148,27 @@ export default class QuestionForm extends Component<
     }
   };
 
-  handleNewAddition = (field: string, value: Answers) => {
+  handleNewAnswer = (field: string, value: Answers) => {
+    console.log(this.state.answers);
+
     const newVal = { [field]: value };
-     this.setState(({answers})=>({answers: {...answers, ...newVal}}))
+    this.setState(({ answers }) => ({ answers: { ...answers, ...newVal } }));
     // console.log(this.state.additions);
+  };
+  handleDeleteAnswer = (key: string) => {
+    const { answers } = this.state;
+    const blob = Object.keys(answers)
+      .filter((k) => k !== key)
+      .map((k) => {
+        return { [k.toString()]: answers[k] };
+      });
+
+    let newAnswer: Additions = {};
+    blob.forEach((elem) => {
+      newAnswer = { ...newAnswer, ...elem };
+    });
+
+    this.setState({ answers: { ...newAnswer } });
   };
 
   validateSubmit = () => {
@@ -228,7 +243,6 @@ export default class QuestionForm extends Component<
   }
   render() {
     return (
-      
       <View style={styles.registrationForm}>
         <Text style={styles.header}>Add new Question</Text>
         <Text>{this.state.id}</Text>
@@ -241,11 +255,11 @@ export default class QuestionForm extends Component<
           validations={this.state.validations.text}
         ></CustomInput>
         <CustomImageInput
-              imageValue={this.state.picture}
-              id={"picture"}
-              header={"Select picture"}
-              onChange={this.handleTextChange}
-            ></CustomImageInput>
+          imageValue={this.state.picture}
+          id={"picture"}
+          header={"Select picture"}
+          onChange={this.handleTextChange}
+        ></CustomImageInput>
         <CustomInput
           id="points"
           value={this.state.points}
@@ -287,7 +301,13 @@ export default class QuestionForm extends Component<
           dropdownIconPosition={"right"}
           dropdownStyle={styles.dropdown1DropdownStyle}
         />
-        <AdditionalInfo answers={this.state.answers} questionTypes={this.state.type} onNewAddition={this.handleNewAddition} onChange={this.handleNewAddition} onDelete={()=>{}}></AdditionalInfo>
+        <AdditionalInfo
+          answers={this.state.answers}
+          questionTypes={this.state.type}
+          onNewAddition={this.handleNewAnswer}
+          onChange={this.handleNewAnswer}
+          onDelete={this.handleDeleteAnswer}
+        ></AdditionalInfo>
         <View style={styles.btnContainer}>
           <CustomButton
             text={"Upload"}
@@ -302,8 +322,7 @@ export default class QuestionForm extends Component<
             textStyles={styles.text}
           ></CustomButton>
         </View>
-        </View>
-      
+      </View>
     );
   }
 }

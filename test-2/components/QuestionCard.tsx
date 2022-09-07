@@ -68,7 +68,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
         >
           {this.props.question.picture !== "" && (
             <Image
-              style={{ ...styles.image, width: 400, height: 300 }}
+              style={{ ...styles.image,width:300,height:200}}
               source={{ uri: this.props.question.picture }}
             ></Image>
           )}
@@ -104,7 +104,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
                   {value.picture !== "" && (
                     <Image
                       style={styles.image}
-                      source={{ uri: value.picture }}
+                      source={{ uri: value.picture}}
                     ></Image>
                   )}
                   <Text style={{ textAlign: "right", alignSelf: "flex-end" }}>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    resizeMode: "strech",
+    resizeMode: "contain",
     borderRadius: 10,
   },
   btnContainer: {

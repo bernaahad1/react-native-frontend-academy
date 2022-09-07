@@ -20,11 +20,9 @@ interface Point {
 
 interface TestCardProps {
   question: Question;
-  
   appState: Views;
   appStatusChange: (state: Views) => void;
   id: number;
-  
   onDrop?: () => void;
   
 }
