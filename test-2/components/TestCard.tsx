@@ -67,7 +67,7 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
           >
             {this.props.question.text}
           </Text>
-
+          
           <View style={{ width: "100%" }}>
             {answers &&
               Object.entries(answers).map(([key, value]) => (
@@ -90,6 +90,10 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
                           : "white"
                       }
                     />
+                    <Image
+                      style={styles.image}
+                      source={{ uri: value.picture }}
+                    ></Image>
                     <Text style={styles.paragraph}>
                       {value.text}
                     </Text>
@@ -134,8 +138,8 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   image: {
-    width: 400,
-    height: 300,
+    width: 30,
+    height: 30,
     resizeMode: "contain",
     borderRadius: 10,
   },

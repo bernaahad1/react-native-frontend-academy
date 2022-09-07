@@ -23,6 +23,7 @@ interface AdditionalInfoProps {
   questionTypes: string;
   onNewAddition: (arg1: string, arg2: Answers) => void;
   onChange: (arg1: string, arg2: Answers) => void;
+  onDelete:(arg1:string,arg2: Answers)=>void
 }
 
 export default class AdditionalInfo extends Component<
@@ -109,6 +110,17 @@ export default class AdditionalInfo extends Component<
               )}
               <Button
                 title={"Edit"}
+                onPress={() => {
+                  this.setState({ picture: value.picture || "" });
+                  this.setState({ scorePerc: value.scorePerc || "" });
+                  this.setState({ text: value.text || "" });
+                  this.setState({ created: value.created || "" });
+                  this.setState({ modified: value.modified || "" });
+                  this.setState({ id: value.id.toString() || "" });
+                }}
+              ></Button>
+              <Button
+                title={"Delete"}
                 onPress={() => {
                   this.setState({ picture: value.picture || "" });
                   this.setState({ scorePerc: value.scorePerc || "" });

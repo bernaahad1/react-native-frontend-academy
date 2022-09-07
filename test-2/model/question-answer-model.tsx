@@ -12,7 +12,7 @@ export class Question {
   constructor(
     public text: string,
     public type: string,
-    public points: number,
+    public points: string,
     public answers: Additions,
     public picture?: string,
     public created = new Date().toISOString().slice(0, 10),

@@ -105,7 +105,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
                   {value.picture !== "" && (
                     <Image
                       style={styles.image}
-                      source={{ uri: this.props.question.picture }}
+                      source={{ uri: value.picture }}
                     ></Image>
                   )}
                   <Text style={{ textAlign: "right", alignSelf: "flex-end" }}>

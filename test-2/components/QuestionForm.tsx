@@ -43,7 +43,7 @@ type Additions = {
 type NewType = {
   text: string;
   type: string;
-  points: number;
+  points: string;
   picture: string;
   id: string;
   created: string;
@@ -74,7 +74,7 @@ export default class QuestionForm extends Component<
   state: Readonly<QuestionFormState> = {
     id: this.props.question?.id?.toString() || "",
     text: this.props.question?.text || "",
-    points: this.props.question?.points || 0,
+    points: this.props.question?.points || "",
     created:
       this.props.question?.created || new Date().toISOString().split("T")[0],
     modified:
@@ -106,7 +106,9 @@ export default class QuestionForm extends Component<
       return validationError.errors;
     }
   }
-
+  handleDeleteAnswer = (key: string, value: string) => {
+    this.setState(({ answers })=>({}))
+}
   handleValidation = (
     field: string,
     value: string,
@@ -176,11 +178,11 @@ export default class QuestionForm extends Component<
   };
 
   handleRegistrationSubmit = () => {
-    if (!this.validateSubmit()) {
-      console.log("no submit");
+    //if (!this.validateSubmit()) {
+    //   console.log("no submit");
 
-      return;
-    }
+    //   return;
+    // }
 
     this.props.onCreateQuestion(
       new Question(
@@ -207,7 +209,7 @@ export default class QuestionForm extends Component<
     this.setState({
       id: "",
       text: "",
-      points: 0,
+      points: "",
       created: new Date().toISOString().split("T")[0],
       modified: new Date().toISOString().split("T")[0],
       picture: "",
@@ -225,6 +227,7 @@ export default class QuestionForm extends Component<
   }
   render() {
     return (
+      <ScrollView>
       <View style={styles.registrationForm}>
         <Text style={styles.header}>Add new Question</Text>
         <Text>{this.state.id}</Text>
@@ -236,6 +239,21 @@ export default class QuestionForm extends Component<
           valudationErrors={this.state.validationErrors.text}
           validations={this.state.validations.text}
         ></CustomInput>
+        <CustomImageInput
+              imageValue={this.state.picture}
+              id={"picture"}
+              header={"Select picture"}
+              onChange={this.handleTextChange}
+            ></CustomImageInput>
+        <CustomInput
+          id="points"
+          value={this.state.points}
+          header="Points"
+          handleChange={this.handleTextChange}
+          valudationErrors={this.state.validationErrors.text}
+          validations={this.state.validations.text}
+        ></CustomInput>
+        <Text>Select Type</Text>
         <SelectDropdown
           data={this.state.typeArr}
           onSelect={(selectedItem, index) => {
@@ -268,7 +286,7 @@ export default class QuestionForm extends Component<
           dropdownIconPosition={"right"}
           dropdownStyle={styles.dropdown1DropdownStyle}
         />
-        <AdditionalInfo answers={this.state.answers} questionTypes={this.state.type} onNewAddition={this.handleNewAddition} onChange={this.handleNewAddition} ></AdditionalInfo>
+        <AdditionalInfo answers={this.state.answers} questionTypes={this.state.type} onNewAddition={this.handleNewAddition} onChange={this.handleNewAddition} onDelete={()=>{}}></AdditionalInfo>
         <View style={styles.btnContainer}>
           <CustomButton
             text={"Upload"}
@@ -283,7 +301,8 @@ export default class QuestionForm extends Component<
             textStyles={styles.text}
           ></CustomButton>
         </View>
-      </View>
+        </View>
+        </ScrollView>
     );
   }
 }
