@@ -1,0 +1,330 @@
+{
+  "questions": [
+    {
+      "text": "trehrthryhr",
+      "type": "",
+      "points": 0,
+      "answers": {
+        "1": {
+          "scorePerc": "2",
+          "text": "eryreytreyer",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 2
+        },
+        "3": {
+          "scorePerc": "0",
+          "text": "ukyjrtetwetey3u5erhfgdg",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 4
+        }
+      },
+      "picture": "",
+      "created": "2022-09-07",
+      "modified": "2022-09-07",
+      "id": 3
+    },
+    {
+      "text": "frewg35tye5ryt",
+      "type": "MultipleResponse",
+      "points": 0,
+      "answers": {
+        "5": {
+          "scorePerc": "1",
+          "text": "wtyretyerty",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 6
+        },
+        "7": {
+          "scorePerc": "0",
+          "text": "trhdfghfdgh",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 8
+        }
+      },
+      "picture": "",
+      "created": "2022-09-07",
+      "modified": "2022-09-07",
+      "id": 4
+    },
+    {
+      "text": "Questuin????",
+      "type": "MultipleResponse",
+      "points": 0,
+      "answers": {
+        "1": {
+          "scorePerc": "1",
+          "text": "answ1",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 2
+        },
+        "3": {
+          "scorePerc": "2",
+          "text": "answ2",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 4
+        },
+        "5": {
+          "scorePerc": "0",
+          "text": "answ3",
+          "picture": "",
+          "created": "2022-09-07",
+          "modified": "2022-09-07",
+          "id": 6
+        }
+      },
+      "picture": "",
+      "created": "2022-09-07",
+      "modified": "2022-09-07",
+      "id": 5
+    }
+  ],
+  "images": [
+    {
+      "uri": "https://media.istockphoto.com/photos/alexander-nevsky-cathedral-in-sofia-bulgaria-taken-in-may-2019-taken-picture-id1182393363?k=20&m=1182393363&s=612x612&w=0&h=1tVDnEAxLygwPdod5B9ijIBnscyLy-mMNxPI2Mw2RjU=",
+      "title": "new image",
+      "description": "I added this image",
+      "tags": "image, new",
+      "date": "2022-09-05",
+      "isFavorite": true,
+      "id": 1,
+      "additions": {},
+      "authorName": ""
+    },
+    {
+      "uri": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05",
+      "isFavorite": false,
+      "id": 2,
+      "additions": {
+        "New input": "My input new"
+      },
+      "authorName": ""
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Ranger",
+      "lastName": "Power",
+      "username": "powerRanger",
+      "password": "mypasswordranger",
+      "gender": "Male",
+      "userPicture": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png",
+      "description": "I love pomegranate",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-16T14:41:03.052Z",
+      "lastModifTs": "2022-08-16T14:41:03.052Z",
+      "id": 13
+    },
+    {
+      "firstName": "Galina",
+      "lastName": "Penkova",
+      "username": "gali_pk",
+      "password": "1234567890",
+      "gender": "Female",
+      "userPicture": "https://i.pinimg.com/736x/30/24/f8/3024f8d283b734bd6b7e4fc5531fe2e9--create-a-cartoon-avatar.jpg",
+      "description": "Junior Developer",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-16T14:42:38.971Z",
+      "lastModifTs": "2022-08-16T14:42:38.971Z",
+      "id": 14
+    },
+    {
+      "firstName": "Pesho",
+      "lastName": "Gosho",
+      "username": "gosho123",
+      "password": "1233gosho",
+      "gender": "male",
+      "userPicture": "https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg",
+      "description": "New text...",
+      "id": 19,
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-19T06:07:37.397Z",
+      "lastModifTs": "2022-08-19T06:07:37.397Z"
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "username": "werwetwert",
+      "password": "",
+      "gender": "Female",
+      "userPicture": "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      "description": "",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-19T06:56:39.509Z",
+      "lastModifTs": "2022-08-19T06:56:39.509Z",
+      "id": 28
+    },
+    {
+      "firstName": "Petya",
+      "lastName": "Mankova",
+      "username": "petqM123",
+      "password": "new passwd",
+      "gender": "Female",
+      "userPicture": "https://cdn1.vectorstock.com/i/1000x1000/73/15/female-avatar-profile-icon-round-woman-face-vector-18307315.jpg",
+      "description": "Hello, My name is Petya",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-19T07:12:44.308Z",
+      "lastModifTs": "2022-08-19T07:12:44.308Z",
+      "id": 29
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Doan",
+      "username": "janedoan",
+      "password": "123456",
+      "gender": "Female",
+      "userPicture": "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      "description": "hello...",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-19T13:50:26.161Z",
+      "lastModifTs": "2022-08-19T13:50:26.161Z",
+      "id": 31
+    },
+    {
+      "firstName": "Barnie",
+      "lastName": "Ahd",
+      "username": "barnie",
+      "password": "12345678",
+      "gender": "Female",
+      "userPicture": "https://cdn3.vectorstock.com/i/1000x1000/20/67/woman-avatar-profile-vector-21372067.jpg",
+      "description": "Hello from other world",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-23T08:03:11.104Z",
+      "lastModifTs": "2022-08-23T08:03:11.104Z",
+      "id": 38
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "username": "",
+      "password": "",
+      "gender": "",
+      "userPicture": "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      "description": "",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-24T08:03:07.410Z",
+      "lastModifTs": "2022-08-24T08:03:07.410Z",
+      "id": 39
+    },
+    {
+      "firstName": "berna",
+      "lastName": "ahad",
+      "username": "bernaahad123",
+      "password": "12345678",
+      "gender": "Female",
+      "userPicture": "https://static.vecteezy.com/system/resources/previews/004/773/704/original/a-girl-s-face-with-a-beautiful-smile-a-female-avatar-for-a-website-and-social-network-vector.jpg",
+      "description": "my name is Berna and i am ... years old",
+      "userRole": "User",
+      "status": "Active",
+      "registrationTs": "2022-08-25T08:51:11.888Z",
+      "lastModifTs": "2022-08-25T08:51:11.888Z",
+      "id": 42
+    }
+  ],
+  "posts": [
+    {
+      "title": "My first blog",
+      "content": "Here is some information about me...",
+      "tags": "first, blog, post",
+      "imageUrl": "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg",
+      "authorId": 1,
+      "authorName": "Berna Ahad",
+      "id": 1
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:00:37.436Z",
+      "authorName": "",
+      "id": 2
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:00:45.861Z",
+      "authorName": "",
+      "id": 3
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:00:47.293Z",
+      "authorName": "",
+      "id": 4
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:00:57.795Z",
+      "authorName": "",
+      "id": 5
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:00:58.428Z",
+      "authorName": "",
+      "id": 6
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:01:01.810Z",
+      "authorName": "",
+      "id": 7
+    },
+    {
+      "uri": "https://media.istockphoto.com/photos/alexander-nevsky-cathedral-in-sofia-bulgaria-taken-in-may-2019-taken-picture-id1182393363?k=20&m=1182393363&s=612x612&w=0&h=1tVDnEAxLygwPdod5B9ijIBnscyLy-mMNxPI2Mw2RjU=",
+      "title": "regerg",
+      "description": "new image",
+      "tags": "ertgertg,ertgertgretg",
+      "date": "2022-09-05T07:01:02.341Z",
+      "authorName": "",
+      "id": 8
+    },
+    {
+      "uri": "",
+      "title": "",
+      "description": "",
+      "tags": "",
+      "date": "2022-09-05T07:01:48.361Z",
+      "authorName": "",
+      "id": 9
+    }
+  ]
+}
