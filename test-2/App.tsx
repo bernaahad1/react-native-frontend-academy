@@ -183,7 +183,7 @@ class App extends Component<{}, UserAppState> {
               <Pressable
                 style={{
                   position: "absolute",
-                  bottom: 20,
+                  top: 20,
                   right: 20,
                   padding: 5,
                   borderRadius: 10,
@@ -197,14 +197,14 @@ class App extends Component<{}, UserAppState> {
                 <Text
                   style={{ fontSize: 20, fontWeight: "bold", color: "beige" }}
                 >
-                  {"End Test"}
+                  End{Platform.OS === "web" && " the Test"}
                 </Text>
               </Pressable>
             ) : (
               <Pressable
                 style={{
                   position: "absolute",
-                  bottom: 20,
+                  top: 20,
                   right: 20,
                   padding: 5,
                   borderRadius: 10,
@@ -218,7 +218,7 @@ class App extends Component<{}, UserAppState> {
                 <Text
                   style={{ fontSize: 20, fontWeight: "bold", color: "beige" }}
                 >
-                  {"Start the test"}
+                  Start{Platform.OS === "web" && " the Test"}
                 </Text>
               </Pressable>
             )}
@@ -254,7 +254,7 @@ class App extends Component<{}, UserAppState> {
                 />
               </View>
             ) : this.state.appStatus === Views.AddQuestion ? (
-              <ScrollView style={{ backgroundColor: "#F7ECDE" }}>
+              <ScrollView style={{ backgroundColor: "#F7ECDE", height: 0 }}>
                 <View
                   style={{
                     flex: 1,
@@ -281,7 +281,7 @@ class App extends Component<{}, UserAppState> {
                   backgroundColor: "#F7ECDE",
                 }}
               >
-                 <QuestionCardList
+                <QuestionCardList
                   questions={this.state.questions}
                   appState={this.state.appStatus}
                   onEdit={this.handleEditQuestion}

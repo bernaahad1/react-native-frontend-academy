@@ -4,6 +4,7 @@ registerTranslation("en", en);
 import {
   Alert,
   Button,
+  Dimensions,
   Platform,
   Pressable,
   ScrollView,
@@ -227,7 +228,7 @@ export default class QuestionForm extends Component<
   }
   render() {
     return (
-      <ScrollView>
+      
       <View style={styles.registrationForm}>
         <Text style={styles.header}>Add new Question</Text>
         <Text>{this.state.id}</Text>
@@ -302,7 +303,7 @@ export default class QuestionForm extends Component<
           ></CustomButton>
         </View>
         </View>
-        </ScrollView>
+      
     );
   }
 }

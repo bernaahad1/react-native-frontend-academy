@@ -44,7 +44,6 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
   opacityAnim = new Animated.Value(1);
   colorAnim = new Animated.Value(1);
 
- 
   render() {
     const panStyle = {
       transform: this.panValue.getTranslateTransform(),
@@ -69,7 +68,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
         >
           {this.props.question.picture !== "" && (
             <Image
-              style={styles.image}
+              style={{ ...styles.image, width: 400, height: 300 }}
               source={{ uri: this.props.question.picture }}
             ></Image>
           )}
@@ -184,9 +183,9 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   image: {
-    width: 400,
-    height: 300,
-    resizeMode: "contain",
+    width: 100,
+    height: 100,
+    resizeMode: "strech",
     borderRadius: 10,
   },
   btnContainer: {

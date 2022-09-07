@@ -51,7 +51,7 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
         >
           {this.props.question.picture !== "" && (
             <Image
-              style={styles.image}
+              style={{ ...styles.image ,width:400, height:300,}}
               source={{ uri: this.props.question.picture }}
             ></Image>
           )}
