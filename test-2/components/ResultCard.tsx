@@ -18,6 +18,7 @@ interface Props {
   appStatusChange: (state: Views) => void;
   id: number;
   selectedQuestionAnswers: Additions;
+  addToFinalResults: (nim: number) => void;
 }
 
 interface State {
@@ -30,23 +31,19 @@ export default class ResultCard extends Component<Props, State> {
   };
   componentDidMount(): void {
     let points = 0;
-    console.log("====================================");
-    console.log(this.props.selectedQuestionAnswers);
-      console.log("====================================");
 
-      if (this.props.selectedQuestionAnswers !== undefined) {
-         points =  parseInt(this.props.question.points) * Object.values(this.props.selectedQuestionAnswers).reduce(
-              (prevValue, value) => prevValue + ( value !== undefined ? parseInt(value.scorePerc) : 0),
+    if (this.props.selectedQuestionAnswers !== undefined) {
+      points =
+        (parseInt(this.props.question.points) *
+          Object.values(this.props.selectedQuestionAnswers).reduce(
+            (prevValue, value) =>
+              prevValue + (value !== undefined ? parseInt(value.scorePerc) : 0),
             0
-          ) / 100;
-      }
-      
-
-    
-    this.setState(({ maxReachedPoints: points }))
-    console.log('====================================');
-    console.log(points);
-    console.log('====================================');
+          )) /
+        100;
+    }
+    this.props.addToFinalResults(points);
+    this.setState({ maxReachedPoints: points });
   }
   findAnswerPoints = (maxP: number, prc: number) => {
     return maxP * (prc / 100);
@@ -61,20 +58,33 @@ export default class ResultCard extends Component<Props, State> {
       );
     });
     this.setState({ maxReachedPoints: points });
-    console.log("====================================");
-    console.log(points);
-    console.log("====================================");
+  };
+
+  getColor = (key: string, value: Answers) => {
+    if (this.props.selectedQuestionAnswers !== undefined) {
+      const res1 = Object.keys(this.props.selectedQuestionAnswers).find(
+        (k) => k === key
+      );
+      if (res1 === undefined) {
+        return "transparent";
+      } else if (
+        parseInt(this.props.selectedQuestionAnswers[res1].scorePerc) > 0
+      ) {
+        return "lightgreen";
+      } else {
+        return "tomato";
+      }
+    }
+    return "transparent";
   };
   render() {
     const { answers } = { ...this.props.question };
+    const { selectedQuestionAnswers, ...rest } = { ...this.props };
     return (
       <View style={{ ...styles.outerCard }}>
         <View
-          // {...this.panResponder.panHandlers}
           style={{
             ...styles.card,
-            // opacity: this.opacityAnim,
-            //backgroundColor: backgroundColor,
           }}
           key={this.props.question.id!.toString()}
         >
@@ -111,6 +121,7 @@ export default class ResultCard extends Component<Props, State> {
                     alignItems: "flex-start",
                     borderColor: "gray",
                     borderBottomWidth: 1,
+                    backgroundColor: this.getColor(key, value),
                   }}
                 >
                   <Text style={{ textAlign: "left", fontSize: 20 }}>
@@ -123,7 +134,7 @@ export default class ResultCard extends Component<Props, State> {
                     ></Image>
                   )}
                   <Text style={{ textAlign: "right", alignSelf: "flex-end" }}>
-                    Answer Score: {value.scorePerc}
+                    Answer Score: {value.scorePerc}%
                   </Text>
                 </View>
               ))}
@@ -174,7 +185,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 4,
-    // width: "100%",
     color: "#F7ECDE",
     fontWeight: "bold",
   },

@@ -36,44 +36,64 @@ interface Props {
   appStatusChange: (state: Views) => void;
   onMove: (index1: number, index2: number) => void;
 }
+interface State {
+  selectedQuestions: { [questionid: number]: Additions };
+  finalResults: number;
+}
 
-const QuestionCardList = forwardRef<FlatList<Question>, Props>(
-  (props, fRef) => {
-    const { questions, ...rest }: Props = props;
-    const [selectedQuestions, setSelectedQuestions] = useState(
-      {} as { [questionid: number]: Additions }
-    );
+export default class QuestionCardList extends Component<Props, State> {
+  state: Readonly<State> = {
+    selectedQuestions: {},
+    finalResults: 0,
+  };
 
-    const getQuestions = (questionId: number, answer: Additions) => {
-      setSelectedQuestions({
-        ...selectedQuestions,
+  getQuestions = (questionId: number, answer: Additions) => {
+    this.setState({
+      selectedQuestions: {
+        ...this.state.selectedQuestions,
         ...{ ...{ [questionId]: answer } },
-      });
-      // console.log("====================================");
-      // console.log(selectedQuestions);
-      // console.log("====================================");
-    };
+      },
+    });
+  };
 
-    const handleDeleteAnswer = (questionId: number, answerKey: string) => {
-      const blob = Object.keys(selectedQuestions[questionId])
-        .filter((k) => k !== answerKey)
-        .map((k) => {
-          return { [k.toString()]: selectedQuestions[questionId][k] };
-        });
+  maximumResults = () => {
+    return Object.values(this.props.questions).reduce(
+      (prevValue, value) =>
+        prevValue + (value !== undefined ? parseInt(value.points) : 0),
+      0
+    );
+  };
 
-      let newAnswer: Additions = {};
-      blob.forEach((elem) => {
-        newAnswer = { ...newAnswer, ...elem };
+  handleDeleteAnswer = (questionId: number, answerKey: string) => {
+    const blob = Object.keys(this.state.selectedQuestions[questionId])
+      .filter((k) => k !== answerKey)
+      .map((k) => {
+        return { [k.toString()]: this.state.selectedQuestions[questionId][k] };
       });
-      setSelectedQuestions({
-        ...selectedQuestions,
+
+    let newAnswer: Additions = {};
+    blob.forEach((elem) => {
+      newAnswer = { ...newAnswer, ...elem };
+    });
+    this.setState({
+      selectedQuestions: {
+        ...this.state.selectedQuestions,
         ...{ ...{ [questionId]: newAnswer } },
-      });
-      // this.setState({ selectedAnswers: { ...newAnswer } });
-    };
+      },
+    });
+    //this.setState({ selectedAnswers: { ...newAnswer } });
+  };
+  setResults = (points: number) => {
+    this.setState(({ finalResults }) => ({
+      finalResults: (finalResults += points),
+    }));
+  };
+
+  render() {
+    const { questions, ...rest } = { ...this.props };
     return (
       <>
-        {props.appState === Views.StartTest && (
+        {this.props.appState === Views.StartTest ? (
           <Pressable
             style={{
               position: "absolute",
@@ -87,46 +107,72 @@ const QuestionCardList = forwardRef<FlatList<Question>, Props>(
               zIndex: 50,
             }}
             onPress={() => {
-              props.appStatusChange(Views.ViewResults)
-              console.log("====================================");
-            console.log(selectedQuestions);
-              console.log("====================================");
-            }
-            }
+              this.props.appStatusChange(Views.ViewResults);
+            }}
           >
             <Text style={{ fontSize: 20, fontWeight: "bold", color: "beige" }}>
               End{Platform.OS === "web" && " the Test"}
             </Text>
           </Pressable>
+        ) : this.props.appState === Views.ViewResults ? (
+          <Pressable
+            style={{
+              position: "absolute",
+              top: -40,
+              right: 20,
+              padding: 5,
+              borderRadius: 10,
+              backgroundColor: "red",
+              borderColor: "darkred",
+              borderWidth: 2,
+              zIndex: 50,
+            }}
+            onPress={() => {
+              this.setState({ finalResults: 0,selectedQuestions:{} });
+              this.props.appStatusChange(Views.EditingQuestions);
+            }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "bold", color: "beige" }}>
+              Finish
+            </Text>
+          </Pressable>
+        ) : (
+          <></>
         )}
-        {rest.appState === Views.ViewResults ? (
-          <FlatList<Question>
-            ref={fRef}
-            style={{ width: "100%", height: 400 }}
-            data={questions}
-            nestedScrollEnabled
-            renderItem={({ item: question }) => (
-              <View
-                style={{
-                  zIndex: 50,
-                  elevation: 50,
-                }}
-              >
-                <ResultCard
-                  question={question}
-                  key={question.id}
-                  selectedQuestionAnswers={
-                    selectedQuestions[question.id as number]
-                  }
-                  id={questions.indexOf(question)}
-                  {...rest}
-                ></ResultCard>
-              </View>
-            )}
-          />
+        {this.props.appState === Views.ViewResults ? (
+          <>
+            <View>
+              <Text>
+                Total: {this.state.finalResults}/{this.maximumResults()}
+              </Text>
+            </View>
+            <FlatList<Question>
+              style={{ width: "100%", height: 400 }}
+              data={questions}
+              nestedScrollEnabled
+              renderItem={({ item: question }) => (
+                <View
+                  style={{
+                    zIndex: 50,
+                    elevation: 50,
+                  }}
+                >
+                  <ResultCard
+                    question={question}
+                    addToFinalResults={this.setResults}
+                    key={question.id}
+                    selectedQuestionAnswers={
+                      this.state.selectedQuestions[question.id as number]
+                    }
+                    id={this.props.questions.indexOf(question)}
+                    {...rest}
+                  ></ResultCard>
+                </View>
+              )}
+            />
+          </>
         ) : (
           <FlatList<Question>
-            ref={fRef}
             style={{ width: "100%", height: 400 }}
             data={questions}
             nestedScrollEnabled
@@ -140,8 +186,8 @@ const QuestionCardList = forwardRef<FlatList<Question>, Props>(
                 {rest.appState === Views.StartTest ? (
                   <View key={question.id}>
                     <TestCard
-                      handleDeleteAnswer={handleDeleteAnswer}
-                      handleSelectedAnswers={getQuestions}
+                      handleDeleteAnswer={this.handleDeleteAnswer}
+                      handleSelectedAnswers={this.getQuestions}
                       question={question}
                       key={question.id}
                       id={questions.indexOf(question)}
@@ -166,9 +212,7 @@ const QuestionCardList = forwardRef<FlatList<Question>, Props>(
       </>
     );
   }
-);
-
-export default QuestionCardList;
+}
 
 const styles = StyleSheet.create({
   content: {

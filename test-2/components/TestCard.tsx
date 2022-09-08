@@ -35,12 +35,9 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
 
   componentDidMount(): void {
     Object.keys(this.props.question.answers).forEach((key) => {
-      this.setState({
-        isChecked: {
-          ...this.state.isChecked,
-          [key]: false,
-        },
-      });
+      this.setState(({ isChecked }) => ({
+        isChecked: { ...isChecked, [key]: false },
+      }));
     });
   }
 
@@ -87,7 +84,6 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
         });
       }
     }
-    //this.props.handleSelectedAnswers(this.props.question.id as number, this.state.selectedAnswers);
   };
 
   handleDeleteAnswer = (key: string) => {
@@ -103,7 +99,7 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
       newAnswer = { ...newAnswer, ...elem };
     });
     return newAnswer;
-    this.setState({ selectedAnswers: { ...newAnswer } });
+    //this.setState({ selectedAnswers: { ...newAnswer } });
   };
 
   render() {
@@ -138,11 +134,7 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
                     checked={this.state.isChecked[parseInt(key)]}
                     onCheckmarkPress={() => this.handleChecked(key, value)}
                   ></MyCheckbox>
-                  {/* <Checkbox
-                      style={styles.checkbox}
-                      value={this.state.isChecked[parseInt(key)]}
-                      onValueChange={(checked: boolean) => this.handleChecked(key, value)}
-                      color={this.state.isChecked[parseInt(key)] ? "#4630EB" : "white"} /> */}
+
                   <Image
                     style={styles.image}
                     source={{ uri: value.picture }}

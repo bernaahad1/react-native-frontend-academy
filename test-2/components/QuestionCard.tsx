@@ -32,33 +32,21 @@ interface imageItemProps {
     width: number;
     height: number;
   };
-  onDrop?: () => void;
-  itemInfo?: {
-    content: string;
-  };
+  
 }
 
 export default class QuestionCard extends Component<imageItemProps, {}> {
-  panValue = new Animated.ValueXY({ x: 0, y: 0 });
-  opacityAnim = new Animated.Value(1);
-  colorAnim = new Animated.Value(1);
+
 
   render() {
-    const panStyle = {
-      transform: this.panValue.getTranslateTransform(),
-    };
-    const backgroundColor = this.opacityAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ["#fcd56a", "#C4D7E0"],
-      extrapolate: "clamp",
-    });
+    
     const { answers } = { ...this.props.question };
     return (
       <View style={{ ...styles.outerCard }}>
         <Animated.View
           // {...this.panResponder.panHandlers}
           style={{
-            ...panStyle,
+           
             ...styles.card,
             // opacity: this.opacityAnim,
             //backgroundColor: backgroundColor,
@@ -107,7 +95,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
                     ></Image>
                   )}
                   <Text style={{ textAlign: "right", alignSelf: "flex-end" }}>
-                    Answer Score: {value.scorePerc}
+                    Answer Score: {value.scorePerc}%
                   </Text>
                 </View>
               ))}

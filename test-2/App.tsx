@@ -141,7 +141,7 @@ class App extends Component<{}, UserAppState> {
           >
             <StatusBar></StatusBar>
             <SafeAreaView style={{ backgroundColor: "black" }}></SafeAreaView>
-            {this.state.appStatus !== Views.StartTest && (
+            {this.state.appStatus !== Views.StartTest &&  this.state.appStatus !== Views.ViewResults &&(
               <Pressable
                 style={{
                   position: "absolute",
@@ -206,7 +206,7 @@ class App extends Component<{}, UserAppState> {
                   ></QuestionForm>
                 </View>
               </ScrollView>
-            ) : (
+            ) :   (
               <View
                 style={{
                   flex: 1,

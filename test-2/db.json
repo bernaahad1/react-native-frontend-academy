@@ -2,7 +2,7 @@
   "questions": [
     {
       "text": "trehrthryhr",
-      "type": "MultipleResponse",
+      "type": "MultipleChoice",
       "points": "10",
       "answers": {
         "1": {
