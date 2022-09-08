@@ -21,7 +21,7 @@ import CustomInput from "./CustomComponents/CustomInput";
 // import { FormQuestionComponent } from "./Form/FormQuestionComponent";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { DatePickerModal } from "react-native-paper-dates";
-import { Views } from "../model/shared-types";
+import { Additions, Views } from "../model/shared-types";
 import { CalendarDate } from "react-native-paper-dates/lib/typescript/Date/Calendar";
 import DatePickerComponent from "./CustomComponents/DatePickerComponent";
 import React, { Component } from "react";
@@ -37,9 +37,7 @@ type Validations = {
   [key: string]: yup.BaseSchema;
 };
 
-type Additions = {
-  [key: string]: Answers;
-};
+
 
 type NewType = {
   text: string;
@@ -232,6 +230,7 @@ export default class QuestionForm extends Component<
       modified: new Date().toISOString().split("T")[0],
       picture: "",
       answers: {},
+
       validationErrors: {
         text: "",
         type: "",
@@ -276,7 +275,7 @@ export default class QuestionForm extends Component<
           onSelect={(selectedItem, index) => {
             this.handleTextChange("type", this.state.typeArr[index]);
           }}
-          defaultButtonText={this.state.typeArr[0]}
+          defaultButtonText={this.state.type}
           buttonTextAfterSelection={(selectedItem) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected

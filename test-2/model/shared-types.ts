@@ -1,3 +1,5 @@
+import { Answers } from "./question-answer-model";
+
 export enum Views {
   EditingQuestions = 1,
   AddQuestion,
@@ -20,3 +22,6 @@ export interface ImageData {
   width?: number;
   height?: number;
 }
+export type Additions = {
+  [key: string]: Answers;
+};

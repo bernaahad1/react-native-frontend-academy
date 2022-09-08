@@ -2,9 +2,17 @@
   "questions": [
     {
       "text": "trehrthryhr",
-      "type": "",
-      "points": "",
+      "type": "MultipleResponse",
+      "points": "10",
       "answers": {
+        "1": {
+          "scorePerc": "100",
+          "text": "ertyer6uyherthy",
+          "picture": "",
+          "created": "2022-09-08",
+          "modified": "2022-09-08",
+          "id": 4
+        },
         "3": {
           "scorePerc": "0",
           "text": "ukyjrtetwetey3u5erhfgdg",
@@ -22,23 +30,23 @@
     {
       "text": "Questuin????",
       "type": "MultipleResponse",
-      "points": "",
+      "points": "10",
       "answers": {
         "1": {
-          "scorePerc": "4",
+          "scorePerc": "40",
           "text": "fseewf",
           "picture": "",
           "created": "2022-09-07",
           "modified": "2022-09-07",
-          "id": 1
+          "id": 2
         },
         "3": {
-          "scorePerc": "2",
+          "scorePerc": "60",
           "text": "answ2",
           "picture": "",
           "created": "2022-09-07",
           "modified": "2022-09-07",
-          "id": 4
+          "id": 3
         },
         "5": {
           "scorePerc": "0",
@@ -73,7 +81,7 @@
           "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1200px-Nextjs-logo.svg.png",
           "created": "2022-09-07",
           "modified": "2022-09-07",
-          "id": 4
+          "id": 1
         },
         "5": {
           "scorePerc": "0",

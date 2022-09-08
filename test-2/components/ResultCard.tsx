@@ -9,56 +9,69 @@ import {
   Animated,
   PanResponder,
 } from "react-native";
-import { Question } from "../model/question-answer-model";
-import { Views } from "../model/shared-types";
+import { Answers, Question } from "../model/question-answer-model";
+import { Additions, Views } from "../model/shared-types";
 
-interface Point {
-  x: number;
-  y: number;
-}
-
-interface imageItemProps {
+interface Props {
   question: Question;
-  onEdit: (image: Question) => void | undefined;
-  onDelete: (image: Question) => void | undefined;
-  onMove: (index1: number, index2: number) => void;
-  maxQuestions: number;
   appState: Views;
   appStatusChange: (state: Views) => void;
   id: number;
-  dropSquare?: {
-    px: number;
-    py: number;
-    width: number;
-    height: number;
-  };
-  onDrop?: () => void;
-  itemInfo?: {
-    content: string;
-  };
+  selectedQuestionAnswers: Additions;
 }
 
-export default class QuestionCard extends Component<imageItemProps, {}> {
-  panValue = new Animated.ValueXY({ x: 0, y: 0 });
-  opacityAnim = new Animated.Value(1);
-  colorAnim = new Animated.Value(1);
+interface State {
+  maxReachedPoints: number;
+}
 
-  render() {
-    const panStyle = {
-      transform: this.panValue.getTranslateTransform(),
-    };
-    const backgroundColor = this.opacityAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ["#fcd56a", "#C4D7E0"],
-      extrapolate: "clamp",
+export default class ResultCard extends Component<Props, State> {
+  state: Readonly<State> = {
+    maxReachedPoints: 0,
+  };
+  componentDidMount(): void {
+    let points = 0;
+    console.log("====================================");
+    console.log(this.props.selectedQuestionAnswers);
+      console.log("====================================");
+
+      if (this.props.selectedQuestionAnswers !== undefined) {
+         points =  parseInt(this.props.question.points) * Object.values(this.props.selectedQuestionAnswers).reduce(
+              (prevValue, value) => prevValue + ( value !== undefined ? parseInt(value.scorePerc) : 0),
+            0
+          ) / 100;
+      }
+      
+
+    
+    this.setState(({ maxReachedPoints: points }))
+    console.log('====================================');
+    console.log(points);
+    console.log('====================================');
+  }
+  findAnswerPoints = (maxP: number, prc: number) => {
+    return maxP * (prc / 100);
+  };
+
+  findAllPoints = () => {
+    let points = 0;
+    Object.values(this.props.selectedQuestionAnswers).forEach((value) => {
+      points += this.findAnswerPoints(
+        parseInt(this.props.question.points),
+        parseInt(value.scorePerc)
+      );
     });
+    this.setState({ maxReachedPoints: points });
+    console.log("====================================");
+    console.log(points);
+    console.log("====================================");
+  };
+  render() {
     const { answers } = { ...this.props.question };
     return (
       <View style={{ ...styles.outerCard }}>
-        <Animated.View
+        <View
           // {...this.panResponder.panHandlers}
           style={{
-            ...panStyle,
             ...styles.card,
             // opacity: this.opacityAnim,
             //backgroundColor: backgroundColor,
@@ -81,7 +94,10 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
               textTransform: "uppercase",
             }}
           >
-            {this.props.question.text}; Type: {this.props.question.type}
+            {this.props.question.text}
+          </Text>
+          <Text>
+            {this.state.maxReachedPoints}/{this.props.question.points}
           </Text>
 
           <View style={{ width: "100%" }}>
@@ -112,48 +128,7 @@ export default class QuestionCard extends Component<imageItemProps, {}> {
                 </View>
               ))}
           </View>
-          <>
-            <View style={styles.btnContainer}>
-              <>
-                <Pressable
-                  style={{ ...styles.button, backgroundColor: "#94B49F" }}
-                  onPress={() => {
-                    this.props.onEdit(this.props.question);
-                    this.props.appStatusChange(Views.AddQuestion);
-                  }}
-                >
-                  <Text selectable={false}>Edit</Text>
-                </Pressable>
-                <Pressable
-                  style={{ ...styles.button, backgroundColor: "#FF87B2" }}
-                  onPress={() => this.props.onDelete(this.props.question)}
-                >
-                  <Text selectable={false}>Delete</Text>
-                </Pressable>
-                {this.props.id > 0 && (
-                  <Pressable
-                    style={{ ...styles.button, backgroundColor: "gray" }}
-                    onPress={() =>
-                      this.props.onMove(this.props.id, this.props.id - 1)
-                    }
-                  >
-                    <Text selectable={false}>Move up</Text>
-                  </Pressable>
-                )}
-                {this.props.id < this.props.maxQuestions && (
-                  <Pressable
-                    style={{ ...styles.button, backgroundColor: "gray" }}
-                    onPress={() =>
-                      this.props.onMove(this.props.id, this.props.id + 1)
-                    }
-                  >
-                    <Text selectable={false}>Move Down</Text>
-                  </Pressable>
-                )}
-              </>
-            </View>
-          </>
-        </Animated.View>
+        </View>
       </View>
     );
   }

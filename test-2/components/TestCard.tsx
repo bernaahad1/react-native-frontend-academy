@@ -9,22 +9,101 @@ import {
   Animated,
   PanResponder,
 } from "react-native";
-import { Question } from "../model/question-answer-model";
-import { Views } from "../model/shared-types";
+import { Answers, Question } from "../model/question-answer-model";
+import { Additions, Views } from "../model/shared-types";
 import Checkbox from "expo-checkbox";
+import MyCheckbox from "./CustomComponents/MyCheckbox";
 
 interface TestCardProps {
   question: Question;
   appState: Views;
   appStatusChange: (state: Views) => void;
+  handleSelectedAnswers: (questionId: number, answers: Additions) => void;
+  handleDeleteAnswer: (questionId: number, answersKey: string) => void;
   id: number;
 }
 interface TestCardState {
-  isChecked: boolean[];
+  isChecked: { [key: string]: boolean };
+  selectedAnswers: Additions;
 }
+
 export default class TestCard extends Component<TestCardProps, TestCardState> {
   state: Readonly<TestCardState> = {
-    isChecked: [],
+    isChecked: {},
+    selectedAnswers: {},
+  };
+
+  componentDidMount(): void {
+    Object.keys(this.props.question.answers).forEach((key) => {
+      this.setState({
+        isChecked: {
+          ...this.state.isChecked,
+          [key]: false,
+        },
+      });
+    });
+  }
+
+  handleChecked = (key: string, answer: Answers) => {
+    if (this.props.question.type === "MultipleChoice") {
+      if (this.state.isChecked[parseInt(key)]) {
+        this.setState({ selectedAnswers: {}, isChecked: {} });
+        this.props.handleSelectedAnswers(this.props.question.id as number, {});
+      } else {
+        this.setState({
+          selectedAnswers: { [key]: answer },
+          isChecked: { [key]: true },
+        });
+        this.props.handleSelectedAnswers(this.props.question.id as number, {
+          [key]: answer,
+        });
+      }
+    } else if (this.props.question.type === "MultipleResponse") {
+      if (this.state.isChecked[key] === false) {
+        this.setState({
+          selectedAnswers: { ...this.state.selectedAnswers, [key]: answer },
+        });
+        this.setState({
+          isChecked: {
+            ...this.state.isChecked,
+            [key]: true,
+          },
+        });
+        this.props.handleSelectedAnswers(this.props.question.id as number, {
+          ...this.state.selectedAnswers,
+          [key]: answer,
+        });
+      } else {
+        const newAnsw = this.handleDeleteAnswer(key);
+        this.props.handleSelectedAnswers(this.props.question.id as number, {
+          ...newAnsw,
+        });
+
+        this.setState({
+          isChecked: {
+            ...this.state.isChecked,
+            [key]: false,
+          },
+        });
+      }
+    }
+    //this.props.handleSelectedAnswers(this.props.question.id as number, this.state.selectedAnswers);
+  };
+
+  handleDeleteAnswer = (key: string) => {
+    const { selectedAnswers } = this.state;
+    const blob = Object.keys(selectedAnswers)
+      .filter((k) => k !== key)
+      .map((k) => {
+        return { [k.toString()]: selectedAnswers[k] };
+      });
+
+    let newAnswer: Additions = {};
+    blob.forEach((elem) => {
+      newAnswer = { ...newAnswer, ...elem };
+    });
+    return newAnswer;
+    this.setState({ selectedAnswers: { ...newAnswer } });
   };
 
   render() {
@@ -55,21 +134,15 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
             {answers &&
               Object.entries(answers).map(([key, value]) => (
                 <View style={styles.section} key={parseInt(key)}>
-                  <Checkbox
-                    style={styles.checkbox}
-                    value={this.state.isChecked[parseInt(key)]}
-                    onValueChange={() => {
-                      this.setState({
-                        isChecked: {
-                          ...this.state.isChecked,
-                          [key]: !this.state.isChecked[parseInt(key)],
-                        },
-                      });
-                    }}
-                    color={
-                      this.state.isChecked[parseInt(key)] ? "#4630EB" : "white"
-                    }
-                  />
+                  <MyCheckbox
+                    checked={this.state.isChecked[parseInt(key)]}
+                    onCheckmarkPress={() => this.handleChecked(key, value)}
+                  ></MyCheckbox>
+                  {/* <Checkbox
+                      style={styles.checkbox}
+                      value={this.state.isChecked[parseInt(key)]}
+                      onValueChange={(checked: boolean) => this.handleChecked(key, value)}
+                      color={this.state.isChecked[parseInt(key)] ? "#4630EB" : "white"} /> */}
                   <Image
                     style={styles.image}
                     source={{ uri: value.picture }}

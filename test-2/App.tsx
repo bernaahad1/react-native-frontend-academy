@@ -141,28 +141,7 @@ class App extends Component<{}, UserAppState> {
           >
             <StatusBar></StatusBar>
             <SafeAreaView style={{ backgroundColor: "black" }}></SafeAreaView>
-            {this.state.appStatus === Views.StartTest ? (
-              <Pressable
-                style={{
-                  position: "absolute",
-                  top: 20,
-                  right: 20,
-                  padding: 5,
-                  borderRadius: 10,
-                  backgroundColor: "red",
-                  borderColor: "darkred",
-                  borderWidth: 2,
-                  zIndex: 50,
-                }}
-                onPress={() => this.handleViewChange(Views.ViewResults)}
-              >
-                <Text
-                  style={{ fontSize: 20, fontWeight: "bold", color: "beige" }}
-                >
-                  End{Platform.OS === "web" && " the Test"}
-                </Text>
-              </Pressable>
-            ) : (
+            {this.state.appStatus !== Views.StartTest && (
               <Pressable
                 style={{
                   position: "absolute",
@@ -205,7 +184,6 @@ class App extends Component<{}, UserAppState> {
                   onEdit={this.handleEditQuestion}
                   onDelete={this.handleDeleteQuestion}
                   appStatusChange={this.handleViewChange}
-                  page={0}
                   onMove={this.handleMove}
                 />
               </View>
@@ -243,7 +221,6 @@ class App extends Component<{}, UserAppState> {
                   onEdit={this.handleEditQuestion}
                   onDelete={this.handleDeleteQuestion}
                   appStatusChange={this.handleViewChange}
-                  page={0}
                   onMove={this.handleMove}
                 />
               </View>
