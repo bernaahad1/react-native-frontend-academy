@@ -145,7 +145,7 @@ async function convertToDataUriWithFormat(
 ) {
   const manipResult = await manipulateAsync(uri, [], {
     base64: true,
-    compress: 0.6,
+    compress: 0.3,
     format,
   });
   return "data:image/xxx;base64," + manipResult.base64;

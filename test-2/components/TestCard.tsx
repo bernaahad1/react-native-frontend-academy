@@ -16,6 +16,7 @@ import MyCheckbox from "./CustomComponents/MyCheckbox";
 
 interface TestCardProps {
   question: Question;
+  selectedQuestions: Additions;
   appState: Views;
   appStatusChange: (state: Views) => void;
   handleSelectedAnswers: (questionId: number, answers: Additions) => void;
@@ -36,7 +37,7 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
   componentDidMount(): void {
     Object.keys(this.props.question.answers).forEach((key) => {
       this.setState(({ isChecked }) => ({
-        isChecked: { ...isChecked, [key]: false },
+        isChecked: { ...isChecked, [key]: this.props.selectedQuestions ? Object.keys(this.props.selectedQuestions).includes(key):false },
       }));
     });
   }

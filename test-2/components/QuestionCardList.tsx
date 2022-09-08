@@ -16,7 +16,7 @@ import {
   Platform,
 } from "react-native";
 import { Additions, IdType, Views } from "../model/shared-types";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import ImageCard from "./QuestionCard";
 import NavigationBar from "./NavigationBar";
@@ -24,9 +24,14 @@ import { Answers, Question } from "../model/question-answer-model";
 import TestCard from "./TestCard";
 import QuestionCard from "./QuestionCard";
 import ResultCard from "./ResultCard";
+import { TypeOf } from "yup";
 
 const ITEM_HEIGHT = 300;
 export const DEFAULT_PAGE_SIZE = 3;
+
+export type SelectedQuestionsDict = {
+  [questionid: number]: Additions;
+};
 
 interface Props {
   questions: Question[];
@@ -37,7 +42,7 @@ interface Props {
   onMove: (index1: number, index2: number) => void;
 }
 interface State {
-  selectedQuestions: { [questionid: number]: Additions };
+  selectedQuestions: SelectedQuestionsDict;
   finalResults: number;
 }
 
@@ -47,13 +52,55 @@ export default class QuestionCardList extends Component<Props, State> {
     finalResults: 0,
   };
 
+  componentDidMount(): void {
+    this.readItemFromStorage();
+  }
+
+  getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("@Test1");
+      return (
+        jsonValue != null ? JSON.parse(jsonValue) : {}
+      ) as SelectedQuestionsDict;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  readItemFromStorage = async () => {
+    try {
+      const item = await this.getData();
+      if (item !== undefined) {
+        this.setState({ selectedQuestions: item });
+      }
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  writeItemToStorage = async (newValue: SelectedQuestionsDict) => {
+    try {
+      const jsonValue = JSON.stringify(newValue);
+      await AsyncStorage.setItem("@Test1", jsonValue);
+      this.setState({ selectedQuestions: newValue });
+    } catch (e) {
+      // saving error
+    }
+  };
+
   getQuestions = (questionId: number, answer: Additions) => {
-    this.setState({
-      selectedQuestions: {
-        ...this.state.selectedQuestions,
-        ...{ ...{ [questionId]: answer } },
+    const newValue = {
+      ...this.state.selectedQuestions,
+      ...{
+        ...{ [questionId]: answer },
       },
-    });
+    };
+    this.writeItemToStorage(newValue as SelectedQuestionsDict);
+    // this.setState({
+    //   selectedQuestions: {
+    //     ...this.state.selectedQuestions,
+    //     ...{ ...{ [questionId]: answer } },
+    //   },
+    // });
   };
 
   maximumResults = () => {
@@ -65,23 +112,26 @@ export default class QuestionCardList extends Component<Props, State> {
   };
 
   handleDeleteAnswer = (questionId: number, answerKey: string) => {
-    const blob = Object.keys(this.state.selectedQuestions[questionId])
+    const newRes = Object.keys(this.state.selectedQuestions[questionId])
       .filter((k) => k !== answerKey)
       .map((k) => {
         return { [k.toString()]: this.state.selectedQuestions[questionId][k] };
       });
 
     let newAnswer: Additions = {};
-    blob.forEach((elem) => {
+    newRes.forEach((elem) => {
       newAnswer = { ...newAnswer, ...elem };
     });
-    this.setState({
-      selectedQuestions: {
-        ...this.state.selectedQuestions,
-        ...{ ...{ [questionId]: newAnswer } },
-      },
-    });
-    //this.setState({ selectedAnswers: { ...newAnswer } });
+    // this.setState({
+    //   selectedQuestions: {
+    //     ...this.state.selectedQuestions,
+    //     ...{ ...{ [questionId]: newAnswer } },
+    //   },
+    // });
+    this.writeItemToStorage({
+      ...this.state.selectedQuestions,
+      ...{ ...{ [questionId]: newAnswer } },
+    } as SelectedQuestionsDict);
   };
   setResults = (points: number) => {
     this.setState(({ finalResults }) => ({
@@ -128,7 +178,8 @@ export default class QuestionCardList extends Component<Props, State> {
               zIndex: 50,
             }}
             onPress={() => {
-              this.setState({ finalResults: 0,selectedQuestions:{} });
+              this.setState({ finalResults: 0 });
+              this.writeItemToStorage({});
               this.props.appStatusChange(Views.EditingQuestions);
             }}
           >
@@ -186,6 +237,9 @@ export default class QuestionCardList extends Component<Props, State> {
                 {rest.appState === Views.StartTest ? (
                   <View key={question.id}>
                     <TestCard
+                      selectedQuestions={
+                        this.state.selectedQuestions[question.id!]
+                      }
                       handleDeleteAnswer={this.handleDeleteAnswer}
                       handleSelectedAnswers={this.getQuestions}
                       question={question}
