@@ -147,7 +147,7 @@ export default class QuestionCardList extends Component<Props, State> {
           <Pressable
             style={{
               position: "absolute",
-              top: -40,
+              top: -55,
               right: 20,
               padding: 5,
               borderRadius: 10,
@@ -168,7 +168,7 @@ export default class QuestionCardList extends Component<Props, State> {
           <Pressable
             style={{
               position: "absolute",
-              top: -40,
+              top: -55,
               right: 20,
               padding: 5,
               borderRadius: 10,

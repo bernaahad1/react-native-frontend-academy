@@ -40,9 +40,10 @@ class CustomInput extends Component<CustomInputProps, {}> {
           multiline={this.props.multiline}
           numberOfLines={this.props.numberOfLines}
         />
-        {this.props.valudationErrors && (
+        <Text>
+        {this.props.valudationErrors && 
           <Text style={styles.errors}>{this.props.valudationErrors}</Text>
-        )}
+        }</Text>
       </View>
     );
   }

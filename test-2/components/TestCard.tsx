@@ -135,11 +135,11 @@ export default class TestCard extends Component<TestCardProps, TestCardState> {
                     checked={this.state.isChecked[parseInt(key)]}
                     onCheckmarkPress={() => this.handleChecked(key, value)}
                   ></MyCheckbox>
-
-                  <Image
-                    style={styles.image}
-                    source={{ uri: value.picture }}
-                  ></Image>
+                  {value.picture !== "" &&
+                    <Image
+                      style={styles.image}
+                      source={{ uri: value.picture }}
+                    ></Image>}
                   <Text style={styles.paragraph}>{value.text}</Text>
                 </View>
               ))}

@@ -37,8 +37,6 @@ type Validations = {
   [key: string]: yup.BaseSchema;
 };
 
-
-
 type NewType = {
   text: string;
   type: string;
@@ -83,7 +81,6 @@ export default class QuestionForm extends Component<
     validations: {
       text: yup.string().min(10).max(500),
       uri: yup.string().min(10),
-     
     },
     typeArr: ["None", "MultipleChoice", "MultipleResponse", "DaragAndDrop"],
     answers: this.props.question?.answers || {},
@@ -196,10 +193,8 @@ export default class QuestionForm extends Component<
   handleRegistrationSubmit = () => {
     //if (!this.validateSubmit()) {
     //   console.log("no submit");
-
     //   return;
     // }
-
     this.props.onCreateQuestion(
       new Question(
         this.state.text,
@@ -226,8 +221,8 @@ export default class QuestionForm extends Component<
       id: "",
       text: "",
       points: "",
-      created: new Date().toISOString().split("T")[0],
-      modified: new Date().toISOString().split("T")[0],
+      created: new Date().toISOString(),
+      modified: new Date().toISOString(),
       picture: "",
       answers: {},
 
@@ -240,7 +235,7 @@ export default class QuestionForm extends Component<
   };
 
   getIsoDate(date: Date) {
-    return date.toISOString().split("T")[0];
+    return date.toISOString();
   }
   render() {
     return (
@@ -267,9 +262,8 @@ export default class QuestionForm extends Component<
           header="Points"
           handleChange={this.handleTextChange}
           valudationErrors={this.state.validationErrors.text}
-          validations={this.state.validations.text}
-        ></CustomInput>
-        <Text>Select Type</Text>
+          validations={this.state.validations.text}></CustomInput>
+        <Text>Select Type</Text> 
         <SelectDropdown
           data={this.state.typeArr}
           onSelect={(selectedItem, index) => {
@@ -292,11 +286,11 @@ export default class QuestionForm extends Component<
           rowTextStyle={styles.dropdown1RowTxtStyle}
           renderDropdownIcon={(isOpened) => {
             return (
-              <FontAwesome
+              <Text><FontAwesome
                 name={isOpened ? "chevron-up" : "chevron-down"}
                 color={"#444"}
                 size={18}
-              />
+              /></Text>
             );
           }}
           dropdownIconPosition={"right"}
